@@ -1,19 +1,99 @@
+Claro! Segue um exemplo de como você pode estruturar esse formulário em HTML. Esse formulário contém os campos que você especificou, incluindo campos dinâmicos que aparecem com base nas escolhas do usuário.
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-widht, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie-edge">
-	<title>Aula de GIT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <script>
+        function toggleAddFilhos() {
+            const estadoCivil = document.querySelector('input[name="estadoCivil"]:checked').value;
+            const addFilhosBtn = document.getElementById('addFilhos');
+            if (estadoCivil === 'casado') {
+                addFilhosBtn.style.display = 'block';
+                document.getElementById('cônjugeInfo').style.display = 'block';
+            } else {
+                addFilhosBtn.style.display = 'none';
+                document.getElementById('cônjugeInfo').style.display = 'none';
+            }
+        }
+
+        function addFilhos() {
+            const filhosContainer = document.getElementById('filhosContainer');
+            const newFilhoDiv = document.createElement('div');
+            newFilhoDiv.innerHTML = '<input type="text" placeholder="Nome do Filho">';
+            filhosContainer.appendChild(newFilhoDiv);
+        }
+
+        function addAtualizacao() {
+            const atualizacoesContainer = document.getElementById('atualizacoesContainer');
+            const newAtualizacaoDiv = document.createElement('div');
+            newAtualizacaoDiv.innerHTML = `
+                <input type="text" placeholder="Atuação">
+                <input type="text" placeholder="Pastoral">
+                <input type="text" placeholder="Tempo">
+            `;
+            atualizacoesContainer.appendChild(newAtualizacaoDiv);
+        }
+    </script>
 </head>
 <body>
-	<<div align="center">
-		<h1>Jonaty Macedo</h1>
-		<h2>Site diciplina</h2>
-		<h3>Site Atualizado</h3>
-		
-	</div>
-	
+
+<h1>Formulário de Cadastro</h1>
+
+<form>
+    <label for="nome">Nome:</label><br>
+    <input type="text" id="nome" name="nome" required><br><br>
+
+    <label for="dataNascimento">Data de Nascimento:</label><br>
+    <input type="date" id="dataNascimento" name="dataNascimento" required><br><br>
+
+    <label>Estado Civil:</label><br>
+    <input type="radio" id="solteiro" name="estadoCivil" value="solteiro" onchange="toggleAddFilhos()">
+    <label for="solteiro">Solteiro</label><br>
+    <input type="radio" id="viuvo" name="estadoCivil" value="viuvo" onchange="toggleAddFilhos()">
+    <label for="viuvo">Viúvo</label><br>
+    <input type="radio" id="divorciado" name="estadoCivil" value="divorciado" onchange="toggleAddFilhos()">
+    <label for="divorciado">Divorciado</label><br>
+    <input type="radio" id="casado" name="estadoCivil" value="casado" onchange="toggleAddFilhos()">
+    <label for="casado">Casado</label><br><br>
+
+    <div id="cônjugeInfo" style="display:none;">
+        <label for="nomeConjuge">Nome do Cônjuge:</label><br>
+        <input type="text" id="nomeConjuge" name="nomeConjuge"><br><br>
+        
+        <label for="telefoneConjuge">Telefone:</label><br>
+        <input type="text" id="telefoneConjuge" name="telefoneConjuge"><br><br>
+    </div>
+
+    <div id="filhosContainer"></div>
+    <button type="button" id="addFilhos" style="display:none;" onclick="addFilhos()">Adicionar Filho</button><br><br>
+
+    <h3>Atualizações</h3>
+    <div id="atualizacoesContainer">
+        <div>
+            <input type="text" placeholder="Atuação">
+            <input type="text" placeholder="Pastoral">
+            <input type="text" placeholder="Tempo">
+        </div>
+    </div>
+    <button type="button" onclick="addAtualizacao()">Adicionar Mais Atualizações</button><br><br>
+
+    <input type="submit" value="Cadastrar">
+</form>
 
 </body>
 </html>
+```
+
+### Explicação:
+- O formulário inclui campos para nome, data de nascimento, estado civil e informações do cônjuge, além de permitir a adição de filhos e atualizações.
+- O botão "Adicionar Filho" só aparece se o estado civil "Casado" for selecionado.
+- O campo para as informações do cônjuge (nome e telefone) também só é exibido se "Casado" for selecionado.
+- Os campos para atualizações podem ser adicionados dinamicamente ao clicar no botão "Adicionar Mais Atualizações".
+
+Esse código pode ser copiado e colado em um arquivo com a extensão `.html`, que você poderá abrir em um navegador para ver o formulário em ação!
+Esta mensagem foi gerada por Nova - baixe-a gratuitamente:
+https://novaappai.page.link/d4HPTpENiYjSdLKP7
